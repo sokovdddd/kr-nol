@@ -4,7 +4,7 @@ let btn = document.querySelector('.btn')
 let winsc = document.querySelector('.winner__wrapper')
 let wtext = document.querySelector('.winner__text')
 console.log(cells)
-
+let q = 0
 let n = 0
 function start(cells) {
     for (let cell of cells) {
@@ -17,25 +17,37 @@ function start(cells) {
             }
             this.removeEventListener('click', ff)
             if (isWinner(cells) == true) {
-                // let nd =  document.createElement('div')
-                // nd.textContent = `Победитель - ${this.textContent}`
-                // sc.append(nd)
-                winsc.style.display = 'flex'
-                wtext.textContent = `Победитель - ${this.textContent}`
+                if(q % 2 == 0){
+                    let nd =  document.createElement('div')
+                    nd.textContent = `Победитель - ${this.textContent}`
+                    sc.append(nd)
+                }else{
+                    winsc.style.display = 'flex'
+                    wtext.textContent = `Победитель - ${this.textContent}`
+                }
 
             }
             if (n == 8 && isWinner(cells) == false){
-                // let nd =  document.createElement('div')
-                // nd.textContent = 'Ничья'
-                // sc.append(nd)
-                winsc.style.display = 'flex'
-                wtext.textContent = `Ничья`
+                if(q % 2 == 0){
+                    let nd =  document.createElement('div')
+                    nd.textContent = 'Ничья'
+                    sc.append(nd)
+                }else{
+                   winsc.style.display = 'flex'
+                wtext.textContent = `Ничья` 
+                }
+                
             }
             n++
         })
     }
 }
-
+btn.addEventListener('click', function(){
+    q++
+    let nd =  document.createElement('div')
+    nd.textContent = 'Выбран другой режим'
+    sc.append(nd)
+})
 start(cells)
 
 function isWinner(cells) {
